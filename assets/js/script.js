@@ -222,7 +222,7 @@ $(document).ready(function () {
     changeYear: true,
   });
 
-// ? Make lanes droppable
+//  Make lanes droppable
   $(".lane").droppable({
     accept: ".draggable",
     drop: handleDrop,
