@@ -12,27 +12,27 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
    <!-- jquery ui -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-   <!-- my styles -->
+   <!-- stylesheet -->
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Task Board</title>
   </head>
   <body>
     <header class="p-4 mb-4 text-center border-bottom border-5">
       <h1 class="display-3">Task Board</h1>
-      <p class="lead">A simple Kanban board for task management</p>
+      <p class="lead">Task management</p>
     </header>
     <div class="container">
-      <!-- this is the add task button -->
+      <!-- Add task button -->
       <div class="text-center mb-5">
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
       </div>
-      <!-- this is the modal form the add task button pulls up -->
+      <!-- Modal form the add task button pulls up -->
       <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="formModalLabel">Add Task</h1>
-              <!-- top right button to close modal -->
+              <!-- Top right button  -->
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -43,7 +43,7 @@
                     <input autocomplete="off" type="text" class="form-control mb-3" id="taskTitle" />
                   </div>
                   <div class="col-6">
-                    <!-- due date, needs to pull up the little calendar -->
+                    <!-- due date -->
                     <label for="taskDueDate" class="form-label">Task Due Date</label>
                     <input autocomplete="off" type="text" class="form-control mb-3" id="taskDueDate" />
                   </div>

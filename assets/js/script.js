@@ -30,7 +30,7 @@ function generateTaskId() {
 
 // function to create a task card
 function createTaskCard(task) {
-  // Creates a new card element and add the classes `card`, `task-card`, `draggable`, and `my-3`. Also add a `data-task-id` attribute and set it to the task id.
+// Creates a new card element and add the classes `card`, `task-card`, `draggable`, and `my-3`. Also add a `data-task-id` attribute and set it to the task id.
   console.log("we are creating cards");
   
   const taskCard = $('<div>')
@@ -51,7 +51,7 @@ function createTaskCard(task) {
     const now = dayjs();
     const taskDueDate = dayjs(task.tDueDate, 'DD/MM/YYYY');
 
-    //If the task is due today, make the card yellow. If it is overdue, make it red.
+  //If the task is due today, make the card yellow. If it is overdue, make it red.
     if (now.isSame(taskDueDate, 'day')) {
       taskCard.addClass('bg-warning text-white');
     } else if (now.isAfter(taskDueDate)) {
@@ -60,11 +60,11 @@ function createTaskCard(task) {
     }
   }
 
-  //Gather all the elements created above and append them to the correct elements.
+ //Gather all the elements created above and append them to the correct elements.
   cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
   taskCard.append(cardHeader, cardBody);
 
-  // Return the card so it can be appended to the correct lane.
+// Return the card so it can be appended to the correct lane.
   return taskCard;
 }
 
@@ -85,7 +85,7 @@ function renderTaskList() {
   const doneList = $("#done-cards");
   doneList.empty();
 
-  //Loop through taskList and create task cards for each status
+//Loop through taskList and create task cards for each status
   for (let task of taskList) {
     if (task.status === "to-do") {
       todoList.append(createTaskCard(task));
@@ -96,17 +96,17 @@ function renderTaskList() {
     }
   }
 
-  //  make task cards draggable
+//  make task cards draggable
   $(".draggable").draggable({
     opacity: 0.7,
     zIndex: 100,
-    // the function that creates the clone of the card that is dragged. 
+// the function that creates the clone of the card that is dragged. 
     helper: function (e) {
-      //Check if the target of the drag event is the card itself or a child element. 
+//Check if the target of the drag event is the card itself or a child element. 
       const original = $(e.target).hasClass("ui-draggable")
         ? $(e.target)
         : $(e.target).closest(".ui-draggable");
-      // Return the clone with the width set to the width of the original card. 
+// Return the clone with the width set to the width of the original card. 
       return original.clone().css({
         width: original.outerWidth(),
       });
@@ -121,15 +121,15 @@ function saveTasksToStorage(taskList) {
 
 //a function to handle adding a new task
 function handleAddTask(event) {
-  //prevent default action
+//prevent default action
   event.preventDefault();
 
-  //record info from form.
+//record info from form.
   let title = $("#taskTitle");
   let dueDate = $("#taskDueDate");
   let description = $("#taskDescription");
 
-  //create new object from form data
+//create new object from form data
   const newTask = {
     tTitle: title.val().trim(),
     tDueDate: dueDate.val(),
@@ -138,22 +138,21 @@ function handleAddTask(event) {
     status: 'to-do',
   };
 
-  //log to check task is being stored
+//log to check task is being stored
   console.log(newTask);
 
-  //get list in local storage
+//get list in local storage
   const taskList = readTasksFromStorage();
 
-  //save the task to local storage
+//save the task to local storage
   taskList.push(newTask);
   saveTasksToStorage(taskList);
 
-  //check the array hs the new info in it
+//check the array hs the new info in it
   console.log(taskList);
 
   renderTaskList();
-
-  //clear inputs
+//clear inputs
   $("#taskTitle").val('');
   $("#taskDueDate").val('');
   $("#taskDescription").val('');
@@ -170,10 +169,10 @@ function handleDeleteTask() {
       }
     });
   
-    // function to save the projects to localStorage
+// function to save the projects to localStorage
     saveTasksToStorage(taskList);
   
-    //  use other function to print projects back to the screen
+//  use other function to print projects back to the screen
     renderTaskList();
   }
 
@@ -187,22 +186,22 @@ function handleDrop(event, ui) {
      // Read projects from localStorage
   const taskList = readTasksFromStorage();
 
-  // ? Get the project id from the event
+// ? Get the project id from the event
   const taskId = ui.draggable[0].dataset.taskId;
 
   console.log(taskId);
 
-  // Get the id of the lane that the card was dropped into
+// Get the id of the lane that the card was dropped into
   const newStatus = event.target.id;
 
   for ( let task of taskList) {
-    // Find the project card by the `id` and update the project status.
+// Find the project card by the `id` and update the project status.
     if (task.tID === taskId) {
       task.status = newStatus;
       console.log(`task status: ${task.status}`);
     }
   }
-  // Save the updated projects array to localStorage (overwritting the previous one) and render the new project data to the screen.
+   // Save the updated projects array to localStorage (overwritting the previous one) and render the new project data to the screen.
   localStorage.setItem('taskList', JSON.stringify(taskList));
   
   renderTaskList();
@@ -223,7 +222,7 @@ $(document).ready(function () {
     changeYear: true,
   });
 
-  // ? Make lanes droppable
+// ? Make lanes droppable
   $(".lane").droppable({
     accept: ".draggable",
     drop: handleDrop,
