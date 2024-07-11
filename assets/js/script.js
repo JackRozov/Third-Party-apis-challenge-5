@@ -19,7 +19,7 @@ function readTasksFromStorage() {
   return taskList;
 }
 
-//function to generate a unique task id
+// generate a unique task id
 function generateTaskId() {
   const taskID = crypto.randomUUID();
 
@@ -28,7 +28,7 @@ function generateTaskId() {
   return nextId;
 }
 
-// function to create a task card
+//  create a task card
 function createTaskCard(task) {
  // Creates a new card element and add the classes `card`, `task-card`, `draggable`, and `my-3`. Also add a `data-task-id` attribute and set it to the task id.
   console.log("we are creating cards");
@@ -46,7 +46,7 @@ function createTaskCard(task) {
     .attr('data-task-id', task.tID).attr('id', task.tID);
   cardDeleteBtn.on('click', handleDeleteTask);
 
-// Sets the card background color based on due date. Only apply the styles if the dueDate exists and the status is not done.
+// Sets the card background color based on due date
   if (task.tDueDate && task.status !== 'done') {
     const now = dayjs();
     const taskDueDate = dayjs(task.tDueDate, 'DD/MM/YYYY');
@@ -68,7 +68,7 @@ function createTaskCard(task) {
   return taskCard;
 }
 
-//function to render the task list and make cards draggable
+//render the task list and make cards draggable
 function renderTaskList() {
   const taskList = readTasksFromStorage();
 
@@ -95,11 +95,11 @@ function renderTaskList() {
       doneList.append(createTaskCard(task));
     }
   }
-  //  make task cards draggable
+  //make task cards draggable
   $(".draggable").draggable({
     opacity: 0.7,
     zIndex: 100,
-// the function that creates the clone of the card that is dragged. 
+// that creates the clone of the card that is dragged. 
     helper: function (e) {
       //Check if the target of the drag event is the card itself or a child element. 
       const original = $(e.target).hasClass("ui-draggable")
@@ -169,10 +169,10 @@ function handleDeleteTask() {
       }
     });
   
-// function to save the projects to localStorage
+// save the projects to localStorage
     saveTasksToStorage(taskList);
   
- //  use other function to print projects back to the screen
+ //  to print projects back to the screen
     renderTaskList();
   }
 
